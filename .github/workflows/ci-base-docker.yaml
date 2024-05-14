@@ -6,6 +6,18 @@ on:
       - docker/base/**
     branches: ['main']
 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
