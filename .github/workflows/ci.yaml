@@ -30,7 +30,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/mach5even/cosmos-candyfloss-base # ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}-base/${{ env.IMAGE_NAME }} #ghcr.io/mach5even/cosmos-candyfloss-base # 
           tags: |
             type=ref,event=branch
             type=ref,event=pr
