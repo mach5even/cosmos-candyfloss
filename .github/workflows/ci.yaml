@@ -98,11 +98,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Format tags
+      - name: Format tags (swap newlines with commas)
         run:
-          RAW_TAGS="${{ steps.meta-final.outputs.tags }}"
-          FINAL_TAGS=$(echo $RAW_TAGS | sed 'N;s/\n/,/')
-          echo "FINAL_TAGS=$FINAL_TAGS" >> $GITHUB_ENV
+          echo "FINAL_TAGS=$(echo $DOCKER_METADATA_OUTPUT_TAGS | sed 'N;s/\n/,/')" >> $GITHUB_ENV
 
       - name: Build and push cosmos candyfloss docker final image
         run: >-
