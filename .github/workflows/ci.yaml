@@ -98,12 +98,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Format tags
+        run:
+          RAW_TAGS=${{ steps.meta-final.outputs.tags }}
+          FINAL_TAGS=$(echo $RAW_TAGS | sed 's/\\\n/,/g')
+          echo "FINAL_TAGS=$FINAL_TAGS" >> $GITHUB_ENV
+
       - name: Build and push cosmos candyfloss docker final image
         run: >-
           ./gradlew :candyfloss:jib 
           -Djib.from.image=${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME}}
           -Djib.to.image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
-          -Djib.to.tags=${{ env.DOCKER_METADATA_OUTPUT_TAGS }}
+          -Djib.to.tags=${{ env.FINAL_TAGS }}
           -Djib.container.user="1001:1001"
         
       - name: Generate artifact attestation
