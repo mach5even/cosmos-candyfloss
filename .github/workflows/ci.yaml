@@ -100,7 +100,7 @@ jobs:
 
       - name: Format tags
         run:
-          RAW_TAGS=${{ steps.meta-final.outputs.tags }}
+          RAW_TAGS="${{ steps.meta-final.outputs.tags }}"
           FINAL_TAGS=$(echo $RAW_TAGS | sed 'N;s/\n/,/')
           echo "FINAL_TAGS=$FINAL_TAGS" >> $GITHUB_ENV
 
