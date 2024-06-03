@@ -103,7 +103,7 @@ jobs:
           ./gradlew :candyfloss:jib 
           -Djib.from.image=${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME}}
           -Djib.to.image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
-          -Djib.to.tags=${{ steps.meta-final.outputs.bake-file-tags }}
+          -Djib.to.tags=${{ steps.meta-final.outputs.tags }}
           -Djib.container.user="1001:1001"
         
       - name: Generate artifact attestation
