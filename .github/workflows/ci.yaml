@@ -77,11 +77,6 @@ jobs:
         id: meta-final
         uses: docker/metadata-action@v5
         with:
-          #images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          flavor: |
-            latest=auto
-            prefix=
-            suffix=
           tags: |
             # set latest tag for master branch
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
