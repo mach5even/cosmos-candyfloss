@@ -92,7 +92,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Format tags (swap newlines with commas)
-        run:
+        run: |
           echo $DOCKER_METADATA_OUTPUT_TAGS
           FINAL_TAGS=$(echo $DOCKER_METADATA_OUTPUT_TAGS | sed ':a;N;$!ba;s/\n|[\t ]+/,/g')
           echo $FINAL_TAGS
