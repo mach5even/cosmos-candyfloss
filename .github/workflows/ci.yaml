@@ -83,7 +83,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr,enable=${{ github.event == 'pull_request' }}
             type=semver,pattern={{raw}}
-          
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
@@ -93,7 +93,11 @@ jobs:
 
       - name: Format tags (swap newlines with commas)
         run:
-          echo "FINAL_TAGS=$(echo $DOCKER_METADATA_OUTPUT_TAGS | sed ':a;N;$!ba;s/\n|[\t ]+/,/g')" >> $GITHUB_ENV
+          echo $DOCKER_METADATA_OUTPUT_TAGS
+          FINAL_TAGS=$(echo $DOCKER_METADATA_OUTPUT_TAGS | sed ':a;N;$!ba;s/\n|[\t ]+/,/g')
+          echo $FINAL_TAGS
+          echo $FINAL_TAGS | sed ':a;N;$!ba;s/[\t ]+/,/g'
+          echo $FINAL_TAGS >> $GITHUB_ENV
 
       - name: Build and push cosmos candyfloss docker final image
         run: >-
