@@ -93,11 +93,7 @@ jobs:
 
       - name: Format tags (swap newlines with commas)
         run: |
-          echo $DOCKER_METADATA_OUTPUT_TAGS
-          FINAL_TAGS=$(echo $DOCKER_METADATA_OUTPUT_TAGS | sed ':a;N;$!ba;s/\n|[\t ]+/,/g')
-          echo $FINAL_TAGS
-          echo $FINAL_TAGS | sed ':a;N;$!ba;s/[\t ]+/,/g'
-          echo $FINAL_TAGS >> $GITHUB_ENV
+          echo "FINAL_TAGS=$(echo $DOCKER_METADATA_OUTPUT_TAGS | sed 's/ /,/g')" >> $GITHUB_ENV
 
       - name: Build and push cosmos candyfloss docker final image
         run: >-
